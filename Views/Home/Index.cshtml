@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MongoFinal.Models.Applicants>
+
+@{
+    ViewData["Title"] = "list";
+}
+
+<h1>list</h1>
+@using (Html.BeginForm())
+{
+    <label for="ENT">Проходной Балл</label>
+    <input type="number" name="ENT" value="@Model.First().ENT" />
+    <input type="submit" value="Поиск" />
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>
+    <a asp-action="Statistics">Statistics</a>
+</p>
+@{int count = 0; }
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FIO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ENT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel_Num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ENT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel_Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+            count = count + 1;
+        }
+    </tbody>
+</table>
+<p>
+    @count - documents.
+</p>
